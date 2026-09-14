@@ -205,7 +205,7 @@ export function HomePage() {
               </Text>
             </Link>
             <Link
-              href="https://github.com/PowerDuckie"
+              href="https://github.com/powerducklab"
               target="_blank"
               rel="noopener noreferrer"
             >

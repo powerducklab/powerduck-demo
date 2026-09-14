@@ -116,7 +116,7 @@ export function DemoLayout({ meta, controls, preview }: DemoLayoutProps) {
             </Link>
           )}
           <Link
-            href="https://github.com/PowerDuckie"
+            href="https://github.com/powerducklab"
             target="_blank"
             rel="noopener noreferrer"
             fontSize="xs"

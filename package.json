@@ -1,5 +1,6 @@
 {
   "name": "powerduck-demo",
+  "description": "Explore PowerDuck open-source libraries with live interactive demos. OpenAPI codegen, cURL to OpenAPI converter, config patcher, and high-performance Markdown editor with @mentions and doc-link insertion.",
   "private": true,
   "version": "1.0.0",
   "type": "module",

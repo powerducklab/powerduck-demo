@@ -78,7 +78,7 @@ export function Layout({ children }: LayoutProps) {
             Docs
           </Link>
           <Link
-            href="https://github.com/PowerDuckie"
+            href="https://github.com/powerducklab"
             target="_blank" rel="noopener noreferrer"
             fontSize="sm"
             color="fg.muted"
@@ -129,7 +129,7 @@ export function Layout({ children }: LayoutProps) {
             Terms
           </Link>
           <Link
-            href="https://github.com/PowerDuckie"
+            href="https://github.com/powerducklab"
             target="_blank" rel="noopener noreferrer"
             fontSize="xs"
             color="fg.muted"
