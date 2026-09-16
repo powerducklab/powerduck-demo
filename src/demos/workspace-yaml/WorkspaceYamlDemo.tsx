@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Box, Button, HStack, Input, Text, VStack, Badge } from "@chakra-ui/react";
 import Editor from "@monaco-editor/react";
 import { DemoLayout } from "../../components/DemoLayout";
+import { createWorkspaceYaml, createOpenApiYaml } from "@powerduck/workspace-yaml/core";
 import type { DemoMeta } from "../../types";
 
 const META: DemoMeta = {
@@ -26,93 +27,74 @@ export function WorkspaceYamlDemo() {
   const [openapiYaml, setOpenapiYaml] = useState("");
 
   const generate = () => {
-    // Generate workspace.yaml
-    const ws = `activeOasFileId: ${apiId}
-defaultEnvironment: production
-oasFiles:
-  - id: ${apiId}
-    name: ${apiName}
-    file: oasFiles/${apiId}.openapi.yaml
-`;
-    setWorkspaceYaml(ws);
-
-    // Generate OpenAPI YAML
-    const oas = `openapi: "3.2.0"
-info:
-  title: ${apiTitle}
-  version: ${version}
-servers:
-  - url: ${serverUrl}
-    description: Production
-paths: {}
-`;
-    setOpenapiYaml(oas);
+    setWorkspaceYaml(createWorkspaceYaml());
+    setOpenapiYaml(
+      createOpenApiYaml({
+        title: apiTitle,
+        version,
+        servers: [{ url: serverUrl, description: "Production" }],
+      }),
+    );
   };
 
-  const controls = useMemo(
-    () => (
-      <VStack gap={3} align="stretch">
-        <Text fontSize="sm" color="fg.muted">
-          Fill in the API details below and click Generate to create workspace.yaml and OpenAPI YAML.
-        </Text>
-        <VStack gap={2}>
-          <Box w="full">
-            <Text fontSize="xs" fontWeight="600" mb={1}>API ID</Text>
-            <Input size="sm" value={apiId} onChange={(e) => setApiId(e.target.value)} />
-          </Box>
-          <Box w="full">
-            <Text fontSize="xs" fontWeight="600" mb={1}>Display Name</Text>
-            <Input size="sm" value={apiName} onChange={(e) => setApiName(e.target.value)} />
-          </Box>
-          <Box w="full">
-            <Text fontSize="xs" fontWeight="600" mb={1}>API Title</Text>
-            <Input size="sm" value={apiTitle} onChange={(e) => setApiTitle(e.target.value)} />
-          </Box>
-          <Box w="full">
-            <Text fontSize="xs" fontWeight="600" mb={1}>Version</Text>
-            <Input size="sm" value={version} onChange={(e) => setVersion(e.target.value)} />
-          </Box>
-          <Box w="full">
-            <Text fontSize="xs" fontWeight="600" mb={1}>Server URL</Text>
-            <Input size="sm" value={serverUrl} onChange={(e) => setServerUrl(e.target.value)} />
-          </Box>
-        </VStack>
-        <Button onClick={generate} colorPalette="blue" size="sm">Generate YAML</Button>
+  const controls = (
+    <VStack gap={3} align="stretch">
+      <Text fontSize="sm" color="fg.muted">
+        Fill in the API details below and click Generate to create workspace.yaml and OpenAPI YAML.
+      </Text>
+      <VStack gap={2}>
+        <Box w="full">
+          <Text fontSize="xs" fontWeight="600" mb={1}>API ID</Text>
+          <Input size="sm" value={apiId} onChange={(e) => setApiId(e.target.value)} />
+        </Box>
+        <Box w="full">
+          <Text fontSize="xs" fontWeight="600" mb={1}>Display Name</Text>
+          <Input size="sm" value={apiName} onChange={(e) => setApiName(e.target.value)} />
+        </Box>
+        <Box w="full">
+          <Text fontSize="xs" fontWeight="600" mb={1}>API Title</Text>
+          <Input size="sm" value={apiTitle} onChange={(e) => setApiTitle(e.target.value)} />
+        </Box>
+        <Box w="full">
+          <Text fontSize="xs" fontWeight="600" mb={1}>Version</Text>
+          <Input size="sm" value={version} onChange={(e) => setVersion(e.target.value)} />
+        </Box>
+        <Box w="full">
+          <Text fontSize="xs" fontWeight="600" mb={1}>Server URL</Text>
+          <Input size="sm" value={serverUrl} onChange={(e) => setServerUrl(e.target.value)} />
+        </Box>
       </VStack>
-    ),
-    [apiId, apiName, apiTitle, version, serverUrl],
+      <Button onClick={generate} colorPalette="blue" size="sm" mt="auto">Generate YAML</Button>
+    </VStack>
   );
 
-  const preview = useMemo(
-    () => (
-      <VStack gap={3} h="full" align="stretch">
-        <Box flex="1" border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
-          <HStack px={2} py={1} bg="bg.panel" borderBottom="1px solid" borderColor="border">
-            <Badge size="sm" colorPalette="blue">workspace.yaml</Badge>
-          </HStack>
-          <Editor
-            height="250px"
-            defaultLanguage="yaml"
-            value={workspaceYaml || "# Click Generate to see workspace.yaml"}
-            theme="vs-dark"
-            options={{ readOnly: true, minimap: { enabled: false }, fontSize: 12 }}
-          />
-        </Box>
-        <Box flex="1" border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
-          <HStack px={2} py={1} bg="bg.panel" borderBottom="1px solid" borderColor="border">
-            <Badge size="sm" colorPalette="green">oasFiles/{apiId}.openapi.yaml</Badge>
-          </HStack>
-          <Editor
-            height="250px"
-            defaultLanguage="yaml"
-            value={openapiYaml || "# Click Generate to see the OpenAPI YAML"}
-            theme="vs-dark"
-            options={{ readOnly: true, minimap: { enabled: false }, fontSize: 12 }}
-          />
-        </Box>
-      </VStack>
-    ),
-    [workspaceYaml, openapiYaml, apiId],
+  const preview = (
+    <VStack gap={3} h="full" align="stretch">
+      <Box flex="1" minH={0} border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
+        <HStack px={2} py={1} bg="bg.panel" borderBottom="1px solid" borderColor="border">
+          <Badge size="sm" colorPalette="blue">workspace.yaml</Badge>
+        </HStack>
+        <Editor
+          height="250px"
+          defaultLanguage="yaml"
+          value={workspaceYaml || "# Click Generate to see workspace.yaml"}
+          theme="vs-dark"
+          options={{ readOnly: true, minimap: { enabled: false }, fontSize: 12 }}
+        />
+      </Box>
+      <Box flex="1" minH={0} border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
+        <HStack px={2} py={1} bg="bg.panel" borderBottom="1px solid" borderColor="border">
+          <Badge size="sm" colorPalette="green">oasFiles/{apiId}.openapi.yaml</Badge>
+        </HStack>
+        <Editor
+          height="250px"
+          defaultLanguage="yaml"
+          value={openapiYaml || "# Click Generate to see the OpenAPI YAML"}
+          theme="vs-dark"
+          options={{ readOnly: true, minimap: { enabled: false }, fontSize: 12 }}
+        />
+      </Box>
+    </VStack>
   );
 
   return <DemoLayout meta={META} controls={controls} preview={preview} />;

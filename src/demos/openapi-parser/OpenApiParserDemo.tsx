@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Box, Button, HStack, Text, VStack, Badge } from "@chakra-ui/react";
 import Editor from "@monaco-editor/react";
 import { DemoLayout } from "../../components/DemoLayout";
@@ -100,60 +100,54 @@ export function OpenApiParserDemo() {
     }
   };
 
-  const controls = useMemo(
-    () => (
-      <VStack gap={4} align="stretch">
-        <Text fontSize="sm" color="fg.muted">
-          Paste a Swagger 2.0 or OpenAPI 3.x document (JSON or YAML).
-          Click upgrade to get a validated OpenAPI 3.2 document.
-        </Text>
-        <Button onClick={runUpgrade} loading={loading} colorPalette="blue" size="sm">
-          Upgrade to OAS 3.2
-        </Button>
-        {error && (
-          <Box p={3} bg="red.subtle" borderRadius="md" border="1px solid" borderColor="red.muted">
-            <Text fontSize="xs" color="red.fg" fontFamily="mono" whiteSpace="pre-wrap">
-              {error}
-            </Text>
-          </Box>
-        )}
-        <VStack gap={1} align="start">
-          <Text fontSize="xs" fontWeight="600" color="fg.muted">Input document</Text>
-          <Box border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
-            <Editor
-              height="400px"
-              defaultLanguage="yaml"
-              value={input}
-              onChange={(v) => setInput(v ?? "")}
-              theme="vs-dark"
-              options={{ minimap: { enabled: false }, fontSize: 12, lineNumbers: "on" }}
-            />
-          </Box>
-        </VStack>
-      </VStack>
-    ),
-    [input, error, loading],
-  );
-
-  const preview = useMemo(
-    () => (
-      <Box h="full" display="flex" flexDirection="column">
-        <HStack gap={2} mb={2}>
-          <Text fontSize="sm" fontWeight="600">Output</Text>
-          {output && <Badge size="sm" colorPalette="green">OpenAPI 3.2</Badge>}
-        </HStack>
-        <Box flex="1" border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
+  const controls = (
+    <VStack gap={4} align="stretch">
+      <Text fontSize="sm" color="fg.muted">
+        Paste a Swagger 2.0 or OpenAPI 3.x document (JSON or YAML).
+        Click upgrade to get a validated OpenAPI 3.2 document.
+      </Text>
+      <Button onClick={runUpgrade} loading={loading} colorPalette="blue" size="sm">
+        Upgrade to OAS 3.2
+      </Button>
+      {error && (
+        <Box p={3} bg="red.subtle" borderRadius="md" border="1px solid" borderColor="red.muted">
+          <Text fontSize="xs" color="red.fg" fontFamily="mono" whiteSpace="pre-wrap">
+            {error}
+          </Text>
+        </Box>
+      )}
+      <VStack gap={1} align="stretch">
+        <Text fontSize="xs" fontWeight="600" color="fg.muted">Input document</Text>
+        <Box border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
           <Editor
-            height="100%"
-            defaultLanguage="json"
-            value={output || "// Click Upgrade to see the result"}
+            height="400px"
+            defaultLanguage="yaml"
+            value={input}
+            onChange={(v) => setInput(v ?? "")}
             theme="vs-dark"
-            options={{ readOnly: true, minimap: { enabled: false }, fontSize: 12 }}
+            options={{ minimap: { enabled: false }, fontSize: 12, lineNumbers: "on" }}
           />
         </Box>
+      </VStack>
+    </VStack>
+  );
+
+  const preview = (
+    <Box h="full" display="flex" flexDirection="column">
+      <HStack gap={2} mb={2}>
+        <Text fontSize="sm" fontWeight="600">Output</Text>
+        {output && <Badge size="sm" colorPalette="green">OpenAPI 3.2</Badge>}
+      </HStack>
+      <Box flex="1" minH={0} border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
+        <Editor
+          height="100%"
+          defaultLanguage="json"
+          value={output || "// Click Upgrade to see the result"}
+          theme="vs-dark"
+          options={{ readOnly: true, minimap: { enabled: false }, fontSize: 12 }}
+        />
       </Box>
-    ),
-    [output],
+    </Box>
   );
 
   return <DemoLayout meta={META} controls={controls} preview={preview} />;

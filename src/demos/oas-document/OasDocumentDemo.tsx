@@ -128,7 +128,7 @@ export function OasDocumentDemo() {
     () => (
       <Box h="100vh" border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
         {spec ? (
-          <OasDocument input={spec} autoUpgrade={false} style={{ height: "100%" }} />
+          <OasDocument input={spec} autoUpgrade={true} style={{ height: "100%" }} />
         ) : (
           <Box p={8} textAlign="center">
             <Text color="fg.muted">Click "Render Documentation" to see the API docs.</Text>

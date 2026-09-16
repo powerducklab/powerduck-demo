@@ -152,7 +152,7 @@ export function DemoLayout({ meta, controls, preview }: DemoLayoutProps) {
             },
           }}
         >
-          <Box p={4}>{controls}</Box>
+          <Box p={4} display="flex" flexDirection="column" h="full">{controls}</Box>
         </Box>
 
         {/* Right: Preview / Output */}

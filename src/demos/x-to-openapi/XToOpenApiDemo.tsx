@@ -410,6 +410,7 @@ export function XToOpenApiDemo() {
         size={"sm"}
         fontWeight="600"
         py={2}
+        mt="auto"
         borderRadius="md"
         cursor={isLoading ? "not-allowed" : "pointer"}
         _hover={{ opacity: isLoading ? 0.6 : 0.9 }}
