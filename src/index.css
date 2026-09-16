@@ -17,6 +17,12 @@ body,
   overflow: hidden;
 }
 
+/* Sidebar nav hover effect */
+.nav-link:not(.active):hover {
+  background-color: var(--chakra-colors-bg-subtle, #f1f3f5) !important;
+  color: var(--chakra-colors-fg, #1a1d21) !important;
+}
+
 /* Third-party editor components must fill their flex parent */
 .md-editor-root {
   height: 100% !important;

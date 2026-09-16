@@ -70,6 +70,7 @@ export function Layout({ children }: LayoutProps) {
                   <NavLink
                     key={demo.id}
                     to={`/${demo.id}`}
+                    className="nav-link"
                     style={({ isActive }) => ({
                       textDecoration: "none",
                       padding: "6px 12px",
