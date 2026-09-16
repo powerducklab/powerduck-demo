@@ -12,7 +12,7 @@ const META: DemoMeta = {
   description: "Schema-aware Monaco editor for JSON, YAML, and JavaScript",
   longDescription:
     "A Monaco editor driven by any JSON Schema with ghost text, popup completion, enum dropdowns, example auto-fill, and diagnostics.",
-  version: "0.2.3",
+  version: "0.2.7",
   docsUrl: "https://www.powerduck.com/docs/schema-editor/introduction",
   tags: ["monaco", "json-schema", "editor", "autocomplete"],
   category: "Editors",
