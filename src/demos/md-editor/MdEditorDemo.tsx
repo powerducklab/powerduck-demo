@@ -304,7 +304,7 @@ export function MdEditorDemo() {
   );
 
   const previewPanel = (
-    <Box w="full" h="full" minH={0}>
+    <Box flex="1" minH={0} w="full">
       <MarkdownEditorReact
         ref={editorRef}
         defaultValue={SAMPLE_MARKDOWN}
