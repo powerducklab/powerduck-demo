@@ -34,6 +34,7 @@ const META: DemoMeta = {
   version: "0.11.2",
   docsUrl: "https://www.powerduck.com/docs/md-editor/introduction",
   tags: ["markdown", "editor", "wysiwyg", "katex"],
+  category: "Editors",
 };
 
 const DEFAULTS = {

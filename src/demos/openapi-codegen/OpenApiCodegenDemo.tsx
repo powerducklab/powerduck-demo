@@ -73,6 +73,7 @@ const META: DemoMeta = {
   version: "0.5.3",
   docsUrl: "https://www.powerduck.com/docs/openapi-codegen/introduction",
   tags: ["openapi", "codegen", "http", "api"],
+  category: "Codegen",
 };
 
 function extractOperations(spec: unknown): OperationEntry[] {

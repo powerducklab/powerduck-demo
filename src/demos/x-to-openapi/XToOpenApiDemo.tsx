@@ -40,6 +40,7 @@ const META: DemoMeta = {
   version: "0.2.2",
   docsUrl: "https://www.powerduck.com/docs/x-to-openapi/introduction",
   tags: ["openapi", "curl", "postman", "converter"],
+  category: "Converters",
 };
 
 const DEFAULT_OPTIONS: ConvertOptions = {

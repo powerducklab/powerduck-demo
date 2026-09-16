@@ -42,6 +42,7 @@ const META: DemoMeta = {
   version: "0.3.4",
   docsUrl: "https://www.powerduck.com/docs/conf-patch/introduction",
   tags: ["config", "json-patch", "yaml", "rfc6902"],
+  category: "Config",
 };
 
 let nextId = 1;

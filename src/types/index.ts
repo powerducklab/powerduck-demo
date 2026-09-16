@@ -18,6 +18,8 @@ export interface DemoMeta {
   docsUrl?: string;
   /** Tags for filtering / search. */
   tags: string[];
+  /** Sidebar group category. */
+  category: "Converters" | "Codegen" | "Editors" | "Config" | "UI Components";
 }
 
 /** A fully registered demo: metadata + React component. */
