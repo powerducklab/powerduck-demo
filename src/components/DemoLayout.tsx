@@ -57,7 +57,7 @@ export function DemoLayout({ meta, controls, preview }: DemoLayoutProps) {
   }, [meta]);
 
   return (
-    <VStack gap={0} align="stretch" h="calc(100vh - 96px)">
+    <VStack gap={0} align="stretch" h="100%">
       {/* Compact page header */}
       <Flex
         as="header"
@@ -165,7 +165,7 @@ export function DemoLayout({ meta, controls, preview }: DemoLayoutProps) {
           display="flex"
           flexDirection="column"
         >
-          <Box flex="1" minH={0} p={4}>
+          <Box flex="1" minH={0} p={4} display="flex" flexDirection="column">
             {preview}
           </Box>
         </Box>

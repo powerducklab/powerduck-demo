@@ -25,7 +25,7 @@ export function Layout({ children }: LayoutProps) {
   })).filter((g) => g.items.length > 0);
 
   return (
-    <Flex minH="100vh" bg="bg" align="stretch">
+    <Flex h="100vh" bg="bg" align="stretch" overflow="hidden">
       {/* Left Sidebar */}
       <Flex
         as="aside"
@@ -111,7 +111,7 @@ export function Layout({ children }: LayoutProps) {
       </Flex>
 
       {/* Main Content */}
-      <Box as="main" flex="1" overflow="auto" minW={0}>
+      <Box as="main" flex="1" overflow="hidden" minW={0} h="100vh">
         {children}
       </Box>
     </Flex>

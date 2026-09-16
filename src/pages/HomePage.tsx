@@ -68,7 +68,7 @@ export function HomePage() {
   }, [demos]);
 
   return (
-    <Box as="main" maxW="1100px" mx="auto" px={8} py={10}>
+    <Box as="main" maxW="1100px" mx="auto" px={8} py={10} h="100%" overflowY="auto">
       {/* Hero Section */}
       <section aria-labelledby="page-title">
         <VStack gap={3} align="start" mb={10}>
