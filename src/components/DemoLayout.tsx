@@ -137,8 +137,8 @@ export function DemoLayout({ meta, controls, preview }: DemoLayoutProps) {
         {/* Left: Controls */}
         <Box
           as="aside"
-          w="380px"
-          minW="380px"
+          w="560px"
+          minW="560px"
           borderRight="1px solid"
           borderColor="border"
           overflowY="auto"
