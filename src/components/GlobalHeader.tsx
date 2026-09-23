@@ -22,7 +22,9 @@ import { Logo } from "./Logo";
  * into a left drawer.
  */
 
-const WEBSITE = "https://www.powerduck.com";
+// The demo is served from the same origin as the website and Cloud app, so
+// internal cross-product links use root-relative paths and share the session.
+const ORIGIN = "";
 const GITHUB_ORG = "https://github.com/powerducklab";
 
 type NavEntry = {
@@ -33,20 +35,33 @@ type NavEntry = {
 };
 
 const CLIENT_ENTRIES: NavEntry[] = [
-  { label: "Spec Editor", description: "Design OpenAPI in place", href: `${WEBSITE}/#spec-editor` },
-  { label: "API Debug", description: "Send requests and inspect responses", href: `${WEBSITE}/#api-debug` },
-  { label: "MCP Server", description: "Turn a spec into callable tools", href: `${WEBSITE}/#mcp-server` },
-  { label: "API Docs", description: "Render documentation from the same spec", href: `${WEBSITE}/#api-docs` },
+  { label: "Spec Editor", description: "Design OpenAPI in place", href: `${ORIGIN}/#spec-editor` },
+  { label: "API Debug", description: "Send requests and inspect responses", href: `${ORIGIN}/#api-debug` },
+  { label: "MCP Server", description: "Turn a spec into callable tools", href: `${ORIGIN}/#mcp-server` },
+  { label: "API Docs", description: "Render documentation from the same spec", href: `${ORIGIN}/#api-docs` },
 ];
 
-const CLOUD_ENTRIES: NavEntry[] = [
-  { label: "Hub", description: "Browse public docs and MCP servers", href: `${WEBSITE}/hub` },
-  { label: "Cloud Docs", description: "Hosting, access control, and domains", href: `${WEBSITE}/docs/cloud/introduction` },
-  { label: "Sign in", description: "Open the Cloud console", href: `${WEBSITE}/signin` },
-];
+function buildCloudEntries(signedIn: boolean): NavEntry[] {
+  const accountEntry: NavEntry = signedIn
+    ? {
+        label: "Console",
+        description: "Open your Cloud console",
+        href: `${ORIGIN}/console`,
+      }
+    : {
+        label: "Sign in",
+        description: "Open the Cloud console",
+        href: `${ORIGIN}/signin`,
+      };
+  return [
+    { label: "Hub", description: "Browse public docs and MCP servers", href: `${ORIGIN}/hub` },
+    { label: "Cloud Docs", description: "Hosting, access control, and domains", href: `${ORIGIN}/docs/cloud/introduction` },
+    accountEntry,
+  ];
+}
 
 const RESOURCE_ENTRIES: NavEntry[] = [
-  { label: "Documentation", description: "Guides and API references", href: `${WEBSITE}/docs/overview/introduction` },
+  { label: "Documentation", description: "Guides and API references", href: `${ORIGIN}/docs/overview/introduction` },
   { label: "Live Demo", description: "Try every tool in the browser", to: "/" },
   { label: "Open Source", description: "Libraries on GitHub and npm", href: GITHUB_ORG },
 ];
@@ -76,6 +91,31 @@ function useThemeToggle() {
   }, [isDark]);
 
   return { isDark, toggle: () => setIsDark((value) => !value) };
+}
+
+// Shares the same-origin session with the website and Cloud app. Defaults to
+// signed out so the header is correct even if the request fails.
+function useSession(): boolean {
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/auth/me", { credentials: "same-origin" })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (active && data && data.user) {
+          setSignedIn(true);
+        }
+      })
+      .catch(() => {
+        /* Signed out is the safe default. */
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return signedIn;
 }
 
 function MenuIcon(): React.ReactNode {
@@ -228,6 +268,8 @@ function GitHubIcon(): React.ReactNode {
 export function GlobalHeader(): React.ReactNode {
   const navigate = useNavigate();
   const { isDark, toggle } = useThemeToggle();
+  const signedIn = useSession();
+  const cloudEntries = buildCloudEntries(signedIn);
   const [menuOpen, setMenuOpen] = useState(false);
   const themeLabel = isDark ? "Switch to light theme" : "Switch to dark theme";
 
@@ -284,7 +326,7 @@ export function GlobalHeader(): React.ReactNode {
           </Button>
           <Box display={{ base: "none", md: "flex" }} ml={2}>
             <NavDropdown label="Client" entries={CLIENT_ENTRIES} />
-            <NavDropdown label="Cloud" entries={CLOUD_ENTRIES} />
+            <NavDropdown label="Cloud" entries={cloudEntries} />
             <Button
               asChild
               variant="ghost"
@@ -295,7 +337,7 @@ export function GlobalHeader(): React.ReactNode {
               color="fg.muted"
               _hover={{ color: "fg" }}
             >
-              <a href={`${WEBSITE}/#licensing`} target="_blank" rel="noopener noreferrer">
+              <a href={`${ORIGIN}/#licensing`} target="_blank" rel="noopener noreferrer">
                 Pricing
               </a>
             </Button>
@@ -337,8 +379,12 @@ export function GlobalHeader(): React.ReactNode {
             color="fg.muted"
             _hover={{ color: "fg" }}
           >
-            <a href={`${WEBSITE}/signin`} target="_blank" rel="noopener noreferrer">
-              Sign in
+            <a
+              href={signedIn ? `${ORIGIN}/console` : `${ORIGIN}/signin`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {signedIn ? "Console" : "Sign in"}
             </a>
           </Button>
           <Button
@@ -387,7 +433,7 @@ export function GlobalHeader(): React.ReactNode {
               <Stack gap={5}>
                 <MobileSection title="Client" entries={CLIENT_ENTRIES} onNavigate={handleMobileEntry} />
                 <Separator />
-                <MobileSection title="Cloud" entries={CLOUD_ENTRIES} onNavigate={handleMobileEntry} />
+                <MobileSection title="Cloud" entries={cloudEntries} onNavigate={handleMobileEntry} />
                 <Separator />
                 <Button
                   variant="ghost"
@@ -396,7 +442,7 @@ export function GlobalHeader(): React.ReactNode {
                   onClick={() =>
                     handleMobileEntry({
                       label: "Pricing",
-                      href: `${WEBSITE}/#licensing`,
+                      href: `${ORIGIN}/#licensing`,
                     })
                   }
                 >
