@@ -42,7 +42,7 @@ export function Sidebar() {
           </Box>
           <VStack gap={0} align="start">
             <Heading size="sm" fontWeight="700" letterSpacing="tight">
-              PowerDuck
+              Powerduck
             </Heading>
             <Text fontSize="2xs" color="fg.muted">
               Library Playground

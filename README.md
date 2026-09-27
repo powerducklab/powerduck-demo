@@ -1,6 +1,6 @@
-# PowerDuck Library Playground
+# Powerduck Library Playground
 
-An interactive demo application showcasing the PowerDuck open-source library ecosystem. Built with React, TypeScript, Vite, and Chakra UI 3.
+An interactive demo application showcasing the Powerduck open-source library ecosystem. Built with React, TypeScript, Vite, and Chakra UI 3.
 
 ## Features
 
@@ -113,7 +113,7 @@ registerDemo({
 - **Vite** for fast development and building
 - **Chakra UI 3.36.1** for all UI components
 - **React Router 7** for navigation
-- **PowerDuck libraries** for the actual functionality
+- **Powerduck libraries** for the actual functionality
 
 ## License
 

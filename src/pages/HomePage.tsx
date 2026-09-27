@@ -12,7 +12,7 @@ export function HomePage() {
 
   // Update document title and meta for SEO
   useEffect(() => {
-    document.title = "PowerDuck Interactive Playground - OpenAPI Tools & Markdown Editor";
+    document.title = "Powerduck Interactive Playground - OpenAPI Tools & Markdown Editor";
 
     // Meta description
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -23,16 +23,16 @@ export function HomePage() {
     }
     metaDesc.setAttribute(
       "content",
-      "Explore PowerDuck open-source libraries with live interactive demos. OpenAPI codegen, cURL to OpenAPI converter, config patcher, and high-performance Markdown editor with @mentions and doc-link insertion.",
+      "Explore Powerduck open-source libraries with live interactive demos. OpenAPI codegen, cURL to OpenAPI converter, config patcher, and high-performance Markdown editor with @mentions and doc-link insertion.",
     );
 
     // Structured data (JSON-LD) for SEO
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      name: "PowerDuck Interactive Playground",
+      name: "Powerduck Interactive Playground",
       description:
-        "Interactive demos for PowerDuck open-source libraries: OpenAPI codegen, cURL to OpenAPI converter, config patcher, and Markdown editor.",
+        "Interactive demos for Powerduck open-source libraries: OpenAPI codegen, cURL to OpenAPI converter, config patcher, and Markdown editor.",
       url: "https://www.powerduck.com/demo/",
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Web",
@@ -79,7 +79,7 @@ export function HomePage() {
             Interactive Playground
           </Heading>
           <Text as="p" fontSize="md" color="fg.muted" maxW="2xl" lineHeight="1.7">
-            Explore PowerDuck open-source libraries with live demos. Adjust parameters,
+            Explore Powerduck open-source libraries with live demos. Adjust parameters,
             see results instantly, and export configuration JSON. No signup required.
           </Text>
         </VStack>

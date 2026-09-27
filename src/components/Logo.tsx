@@ -3,7 +3,7 @@ interface LogoProps {
 }
 
 /**
- * PowerDuck brand logo.
+ * Powerduck brand logo.
  * Two-tone circular arc mark in amber and teal.
  */
 export function Logo({ size = 24 }: LogoProps) {
