@@ -18,7 +18,7 @@ interface DemoLayoutProps {
  */
 export function DemoLayout({ meta, controls, preview }: DemoLayoutProps) {
   useEffect(() => {
-    document.title = `${meta.name} - PowerDuck Interactive Demo`;
+    document.title = `${meta.name} - Powerduck Interactive Demo`;
 
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
