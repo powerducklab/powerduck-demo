@@ -156,7 +156,7 @@ registerDemo({
   longDescription:
     "Build A2A 1.0/0.3 request examples for JSON-RPC, REST and gRPC, design and RFC 8785-canonicalize an Agent Card, verify its JWKS signature, and download a runnable A2A server project exposing JSON-RPC, REST/HTTP+JSON and native gRPC.",
   version: "0.1.0",
-  docsUrl: "https://www.powerduck.com/docs/client-protocols/a2a/",
+  docsUrl: "https://www.powerduck.com/docs/client/a2a/",
   tags: ["a2a", "agent2agent", "json-rpc", "grpc", "agent-card"],
   category: "Protocols",
   component: A2aKitDemo,
