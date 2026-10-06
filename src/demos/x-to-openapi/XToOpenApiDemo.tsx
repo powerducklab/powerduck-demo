@@ -37,7 +37,7 @@ const META: DemoMeta = {
   description: "Convert cURL and Postman to OpenAPI 3.2",
   longDescription:
     "An extensible production-grade X-to-OpenAPI 3.2 conversion framework. Convert cURL commands and Postman collections to OpenAPI 3.2 documents with automatic path parameter inference, security detection, and schema validation.",
-  version: "0.2.2",
+  version: "0.3.3",
   docsUrl: "https://www.powerduck.com/docs/x-to-openapi/introduction",
   tags: ["openapi", "curl", "postman", "converter"],
   category: "Converters",

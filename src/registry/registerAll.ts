@@ -8,6 +8,7 @@ import { TreeDemo } from "../demos/tree/TreeDemo";
 import { SchemaEditorDemo } from "../demos/schema-editor/SchemaEditorDemo";
 import { OasDocumentDemo } from "../demos/oas-document/OasDocumentDemo";
 import { WorkspaceYamlDemo } from "../demos/workspace-yaml/WorkspaceYamlDemo";
+import { A2aKitDemo } from "../demos/a2a-kit/A2aKitDemo";
 
 /**
  * Central registration of all library tools.
@@ -22,7 +23,7 @@ registerDemo({
   description: "Convert cURL commands and Postman collections to OpenAPI 3.2",
   longDescription:
     "Paste a cURL command or Postman collection and instantly convert it to a valid OpenAPI 3.2 document.",
-  version: "0.2.5",
+  version: "0.3.3",
   docsUrl: "https://www.powerduck.com/docs/x-to-openapi/introduction",
   tags: ["openapi", "curl", "postman", "converter"],
   category: "Converters",
@@ -36,7 +37,7 @@ registerDemo({
   description: "Upgrade Swagger 2.0 / OpenAPI 3.x to validated OpenAPI 3.2",
   longDescription:
     "Paste any Swagger 2.0, OpenAPI 3.0, 3.1, or 3.2 document and upgrade it to a validated OpenAPI 3.2 document.",
-  version: "0.3.6",
+  version: "0.3.7",
   docsUrl: "https://www.powerduck.com/docs/openapi-parser/introduction",
   tags: ["openapi", "swagger", "upgrade", "validate"],
   category: "Converters",
@@ -66,7 +67,7 @@ registerDemo({
   description: "High-performance embeddable Markdown editor with KaTeX and diagrams",
   longDescription:
     "A high-performance embeddable Markdown editor with KaTeX math, Markmap mindmaps, highlight.js code blocks, and rich toolbar.",
-  version: "0.11.7",
+  version: "0.11.8",
   docsUrl: "https://www.powerduck.com/docs/md-editor/introduction",
   tags: ["markdown", "editor", "wysiwyg", "katex"],
   category: "Editors",
@@ -80,7 +81,7 @@ registerDemo({
   description: "Schema-aware Monaco editor for JSON, YAML, and JavaScript",
   longDescription:
     "A Monaco editor driven by any JSON Schema with ghost text, popup completion, enum dropdowns, example auto-fill, and diagnostics.",
-  version: "0.2.3",
+  version: "0.2.12",
   docsUrl: "https://www.powerduck.com/docs/schema-editor/introduction",
   tags: ["monaco", "json-schema", "editor", "autocomplete"],
   category: "Editors",
@@ -108,8 +109,8 @@ registerDemo({
   packageName: "@powerduck/workspace-yaml",
   description: "Generate workspace.yaml and OpenAPI 3.2 YAML from a form",
   longDescription:
-    "Fill in a form to generate a workspace.yaml and OpenAPI 3.2 YAML file content.",
-  version: "0.2.3",
+    "Fill in a form to generate workspace.yaml and OpenAPI 3.2 YAML file content.",
+  version: "0.2.5",
   docsUrl: "https://www.powerduck.com/docs/workspace-yaml/introduction",
   tags: ["workspace", "yaml", "openapi", "generator"],
   category: "Config",
@@ -124,7 +125,7 @@ registerDemo({
   description: "Extensible tree component for API navigation and schema exploration",
   longDescription:
     "Interactive tree component with search, expand/collapse, and keyboard navigation.",
-  version: "0.7.7",
+  version: "0.7.20",
   docsUrl: "https://www.powerduck.com/docs/tree/introduction",
   tags: ["tree", "navigation", "react", "openapi"],
   category: "UI Components",
@@ -138,9 +139,25 @@ registerDemo({
   description: "Drop-in Stripe-style API documentation from any OpenAPI document",
   longDescription:
     "Pass an OpenAPI document and get a full API documentation UI with tree navigation, code examples, and schema exploration.",
-  version: "0.1.3",
+  version: "0.1.14",
   docsUrl: "https://www.powerduck.com/docs/oas-document/introduction",
   tags: ["openapi", "docs", "react", "stripe-style"],
   category: "UI Components",
   component: OasDocumentDemo,
+});
+
+// --- Protocols ---
+registerDemo({
+  id: "a2a-kit",
+  name: "A2A Server Kit",
+  packageName: "@powerduck/a2a-kit",
+  description:
+    "Agent2Agent request builder, Agent Card designer/verifier, and runnable A2A server generator",
+  longDescription:
+    "Build A2A 1.0/0.3 request examples for JSON-RPC, REST and gRPC, design and RFC 8785-canonicalize an Agent Card, verify its JWKS signature, and download a runnable A2A server project exposing JSON-RPC, REST/HTTP+JSON and native gRPC.",
+  version: "0.1.0",
+  docsUrl: "https://www.powerduck.com/docs/client-protocols/a2a/",
+  tags: ["a2a", "agent2agent", "json-rpc", "grpc", "agent-card"],
+  category: "Protocols",
+  component: A2aKitDemo,
 });

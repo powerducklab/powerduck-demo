@@ -12,7 +12,7 @@ const META: DemoMeta = {
   packageName: "@powerduck/oas-document",
   description: "Drop-in Stripe-style API documentation from any OpenAPI document",
   longDescription: "Pass an OpenAPI document and get a full API documentation UI with tree navigation, code examples, and schema exploration.",
-  version: "0.1.3",
+  version: "0.1.14",
   docsUrl: "https://www.powerduck.com/docs/oas-document/introduction",
   tags: ["openapi", "docs", "react", "stripe-style"],
   category: "UI Components",

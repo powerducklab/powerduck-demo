@@ -9,7 +9,14 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const CATEGORY_ORDER = ["Converters", "Codegen", "Editors", "Config", "UI Components"] as const;
+const CATEGORY_ORDER = [
+  "Converters",
+  "Codegen",
+  "Editors",
+  "Config",
+  "UI Components",
+  "Protocols",
+] as const;
 
 /**
  * Application shell: a global cross-product header on top, then a row with the

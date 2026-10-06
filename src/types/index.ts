@@ -19,7 +19,13 @@ export interface DemoMeta {
   /** Tags for filtering / search. */
   tags: string[];
   /** Sidebar group category. */
-  category: "Converters" | "Codegen" | "Editors" | "Config" | "UI Components";
+  category:
+    | "Converters"
+    | "Codegen"
+    | "Editors"
+    | "Config"
+    | "UI Components"
+    | "Protocols";
 }
 
 /** A fully registered demo: metadata + React component. */

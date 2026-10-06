@@ -31,7 +31,7 @@ const META: DemoMeta = {
   description: "High-performance embeddable Markdown editor",
   longDescription:
     "A high-performance embeddable Markdown editor with KaTeX math, Markmap mindmaps, highlight.js code blocks, admonition blocks, rich toolbar, @mentions, /doc-link insertion, image upload hooks, and both simple and complex modes with light/dark themes.",
-  version: "0.11.2",
+  version: "0.11.8",
   docsUrl: "https://www.powerduck.com/docs/md-editor/introduction",
   tags: ["markdown", "editor", "wysiwyg", "katex"],
   category: "Editors",

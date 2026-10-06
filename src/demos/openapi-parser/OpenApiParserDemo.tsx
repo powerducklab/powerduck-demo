@@ -12,7 +12,7 @@ const META: DemoMeta = {
   description: "Upgrade Swagger 2.0 / OpenAPI 3.x to validated OpenAPI 3.2",
   longDescription:
     "Paste any Swagger 2.0, OpenAPI 3.0, 3.1, or 3.2 document and upgrade it to a validated OpenAPI 3.2 document.",
-  version: "0.3.6",
+  version: "0.3.7",
   docsUrl: "https://www.powerduck.com/docs/openapi-parser/introduction",
   tags: ["openapi", "swagger", "upgrade", "validate"],
   category: "Converters",

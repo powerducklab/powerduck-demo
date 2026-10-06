@@ -70,7 +70,7 @@ const META: DemoMeta = {
   description: "Generate HTTP request code from OpenAPI docs",
   longDescription:
     "Generate runnable HTTP request examples from OpenAPI documents. Supports 21 languages and 41 client combinations. Browser-compatible with zero runtime dependencies.",
-  version: "0.5.3",
+  version: "0.6.3",
   docsUrl: "https://www.powerduck.com/docs/openapi-codegen/introduction",
   tags: ["openapi", "codegen", "http", "api"],
   category: "Codegen",

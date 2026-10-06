@@ -11,7 +11,7 @@ const META: DemoMeta = {
   packageName: "@powerduck/workspace-yaml",
   description: "Generate workspace.yaml and OpenAPI 3.2 YAML from a form",
   longDescription: "Fill in a form to generate workspace.yaml and OpenAPI 3.2 YAML file content.",
-  version: "0.2.3",
+  version: "0.2.5",
   docsUrl: "https://www.powerduck.com/docs/workspace-yaml/introduction",
   tags: ["workspace", "yaml", "openapi", "generator"],
   category: "Config",

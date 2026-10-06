@@ -39,7 +39,7 @@ const META: DemoMeta = {
   description: "Two-layer JSON/YAML config patching editor",
   longDescription:
     "Visually construct RFC 6902 patch operations and apply them to a live JSON or YAML configuration string. The core engine preserves comments and formatting, and runs fully in the browser.",
-  version: "0.3.4",
+  version: "0.3.6",
   docsUrl: "https://www.powerduck.com/docs/conf-patch/introduction",
   tags: ["config", "json-patch", "yaml", "rfc6902"],
   category: "Config",

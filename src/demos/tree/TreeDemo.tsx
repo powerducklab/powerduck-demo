@@ -11,7 +11,7 @@ const META: DemoMeta = {
   packageName: "@powerduck/tree",
   description: "Extensible tree component for API navigation and schema exploration",
   longDescription: "Interactive tree component with search, expand/collapse, and keyboard navigation.",
-  version: "0.7.7",
+  version: "0.7.20",
   docsUrl: "https://www.powerduck.com/docs/tree/introduction",
   tags: ["tree", "navigation", "react", "openapi"],
   category: "UI Components",
