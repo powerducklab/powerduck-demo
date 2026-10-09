@@ -31,6 +31,42 @@
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#ffffff" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HXDV7CDEB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-8HXDV7CDEB");
+      // Report client-side route changes for this single-page app.
+      (function () {
+        var lastPath = location.pathname + location.search + location.hash;
+        function reportRoute() {
+          var current = location.pathname + location.search + location.hash;
+          if (current !== lastPath && window.gtag) {
+            lastPath = current;
+            gtag("event", "page_view", { page_path: current });
+          }
+        }
+        var originalPush = history.pushState;
+        var originalReplace = history.replaceState;
+        history.pushState = function () {
+          var result = originalPush.apply(this, arguments);
+          reportRoute();
+          return result;
+        };
+        history.replaceState = function () {
+          var result = originalReplace.apply(this, arguments);
+          reportRoute();
+          return result;
+        };
+        window.addEventListener("popstate", reportRoute);
+        window.addEventListener("hashchange", reportRoute);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
