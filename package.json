@@ -21,7 +21,7 @@
     "@powerduck/oas-document": "^0.1.16",
     "@powerduck/openapi-codegen": "^0.6.3",
     "@powerduck/openapi-parser": "^0.3.7",
-    "@powerduck/schema-editor": "^0.2.13",
+    "@powerduck/schema-editor": "0.2.16",
     "@powerduck/tree": "^0.7.20",
     "@powerduck/workspace-yaml": "^0.2.5",
     "@powerduck/x-to-openapi": "^0.3.3",
