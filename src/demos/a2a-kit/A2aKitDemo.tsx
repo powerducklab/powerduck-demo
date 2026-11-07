@@ -36,7 +36,7 @@ const META: DemoMeta = {
     "Design Agent2Agent requests and Agent Cards, verify JWKS signatures, and scaffold a runnable A2A server",
   longDescription:
     "Build A2A 1.0/0.3 request examples for JSON-RPC, REST and gRPC, design and canonicalize an Agent Card, verify its signature against a pinned public JWKS, and download a runnable A2A server project (JSON-RPC, REST/HTTP+JSON and native gRPC).",
-  version: "0.1.0",
+  version: "0.1.3",
   docsUrl: "https://www.powerduck.com/docs/client/a2a/",
   tags: ["a2a", "agent2agent", "json-rpc", "grpc", "agent-card"],
   category: "Protocols",

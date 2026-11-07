@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Box, Text, VStack, Button } from "@chakra-ui/react";
 import { OasDocument } from "@powerduck/oas-document/react";
 import "@powerduck/oas-document/react/index.css";
@@ -12,7 +12,7 @@ const META: DemoMeta = {
   packageName: "@powerduck/oas-document",
   description: "Drop-in Stripe-style API documentation from any OpenAPI document",
   longDescription: "Pass an OpenAPI document and get a full API documentation UI with tree navigation, code examples, and schema exploration.",
-  version: "0.1.14",
+  version: "0.1.24",
   docsUrl: "https://www.powerduck.com/docs/oas-document/introduction",
   tags: ["openapi", "docs", "react", "stripe-style"],
   category: "UI Components",
@@ -76,23 +76,10 @@ components:
 
 export function OasDocumentDemo() {
   const [specText, setSpecText] = useState(SAMPLE_SPEC);
-  const [spec, setSpec] = useState<string>("");
-  const [error, setError] = useState("");
-
-  const renderDocs = () => {
-    try {
-      // Simple YAML-ish parse for demo: try JSON first, then YAML via the package
-      setSpec(specText);
-      setError("");
-    } catch (e) {
-      setError(String(e));
-    }
-  };
-
-  // Auto-render on mount
-  useMemo(() => {
-    setSpec(SAMPLE_SPEC);
-  }, []);
+  const [spec, setSpec] = useState<string>(SAMPLE_SPEC);
+  const renderDocs = useCallback(() => {
+    setSpec(specText);
+  }, [specText]);
 
   const controls = useMemo(
     () => (
@@ -103,9 +90,6 @@ export function OasDocumentDemo() {
         <Button onClick={renderDocs} colorPalette="blue" size="sm">
           Render Documentation
         </Button>
-        {error && (
-          <Text fontSize="xs" color="red.fg">{error}</Text>
-        )}
         <Box border="1px solid" borderColor="border" borderRadius="md" overflow="hidden">
           <Text fontSize="xs" fontWeight="600" px={2} py={1} bg="bg.panel" borderBottom="1px solid" borderColor="border">
             OpenAPI YAML
@@ -121,7 +105,7 @@ export function OasDocumentDemo() {
         </Box>
       </VStack>
     ),
-    [specText, error],
+    [specText, renderDocs],
   );
 
   const preview = useMemo(

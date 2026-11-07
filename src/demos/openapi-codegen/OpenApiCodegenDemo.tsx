@@ -11,7 +11,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { generate, list, registerBuiltins } from "@powerduck/openapi-codegen";
 import { DemoLayout } from "../../components/DemoLayout";
@@ -70,7 +70,7 @@ const META: DemoMeta = {
   description: "Generate HTTP request code from OpenAPI docs",
   longDescription:
     "Generate runnable HTTP request examples from OpenAPI documents. Supports 21 languages and 41 client combinations. Browser-compatible with zero runtime dependencies.",
-  version: "0.6.3",
+  version: "0.6.8",
   docsUrl: "https://www.powerduck.com/docs/openapi-codegen/introduction",
   tags: ["openapi", "codegen", "http", "api"],
   category: "Codegen",
@@ -103,27 +103,22 @@ export function OpenApiCodegenDemo() {
   const [specText, setSpecText] = useState<string>(JSON.stringify(OPENAPI_SAMPLES[0].spec, null, 2));
   const [spec, setSpec] = useState<unknown>(OPENAPI_SAMPLES[0].spec);
   const [parseError, setParseError] = useState<string | null>(null);
-  const [selectedPath, setSelectedPath] = useState<string>("");
+  const [selectedPath, setSelectedPath] = useState<string>(() => extractOperations(OPENAPI_SAMPLES[0].spec)[0]?.path ?? "");
   const [selectedMethod, setSelectedMethod] = useState<HttpMethod>("get");
   const [language, setLanguage] = useState<string>(LANGUAGES[0]);
   const [client, setClient] = useState<string>(clientsFor(LANGUAGES[0])[0] ?? "");
-  const [serverUrl, setServerUrl] = useState<string>("");
+  const [serverUrl, setServerUrl] = useState<string>((OPENAPI_SAMPLES[0].spec as { servers?: Array<{ url: string }> }).servers?.[0]?.url ?? "");
   const [token, setToken] = useState<string>("");
-  const [code, setCode] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
-
   const operations = useMemo(() => extractOperations(spec), [spec]);
 
-  useEffect(() => {
-    if (operations.length > 0) {
-      setSelectedPath(operations[0].path);
-      setSelectedMethod(operations[0].method);
-    }
-    const servers = (spec as { servers?: Array<{ url: string }> })?.servers;
-    if (servers && servers.length > 0) {
-      setServerUrl(servers[0].url);
-    }
-  }, [spec, operations]);
+  const updateSpec = (next: unknown) => {
+    setSpec(next);
+    const first = extractOperations(next)[0];
+    setSelectedPath(first?.path ?? "");
+    setSelectedMethod(first?.method ?? "get");
+    const servers = (next as { servers?: Array<{ url: string }> } | null)?.servers;
+    setServerUrl(servers?.[0]?.url ?? "");
+  };
 
   const selectedOperation =
     operations.find((o) => o.path === selectedPath && o.method === selectedMethod) ?? operations[0];
@@ -143,7 +138,7 @@ export function OpenApiCodegenDemo() {
     setSpecText(text);
     try {
       const parsed = JSON.parse(text);
-      setSpec(parsed);
+      updateSpec(parsed);
       setParseError(null);
     } catch (e) {
       setParseError(e instanceof Error ? e.message : "Invalid JSON");
@@ -155,16 +150,14 @@ export function OpenApiCodegenDemo() {
     if (sample) {
       const text = JSON.stringify(sample.spec, null, 2);
       setSpecText(text);
-      setSpec(sample.spec);
+      updateSpec(sample.spec);
       setParseError(null);
     }
   };
 
-  const regenerate = useCallback(() => {
+  const { code, error } = useMemo(() => {
     if (!selectedOperation || parseError) {
-      setCode("");
-      setError(parseError ?? "No operation selected");
-      return;
+      return { code: "", error: parseError ?? "No operation selected" };
     }
     try {
       const out = generate({
@@ -176,17 +169,12 @@ export function OpenApiCodegenDemo() {
         serverUrl: serverUrl || undefined,
         securityValues: token ? { bearerAuth: token } : undefined,
       });
-      setCode(out);
-      setError(null);
+      return { code: out, error: null };
     } catch (e) {
-      setCode("");
-      setError(e instanceof Error ? e.message : String(e));
+      return { code: "", error: e instanceof Error ? e.message : String(e) };
     }
   }, [spec, selectedOperation, language, client, serverUrl, token, parseError]);
 
-  useEffect(() => {
-    regenerate();
-  }, [regenerate]);
 
   const controls = (
     <VStack gap={5} align="stretch">
